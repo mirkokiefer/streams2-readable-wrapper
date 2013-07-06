@@ -36,7 +36,7 @@ var createOldStream = function() {
   return stream
 }
 
-describe('streams2-wrapper', function() {
+describe('streams2-readable-wrapper', function() {
   it('should test if our mock stream works', function(done) {
     var index = 0
     var test = createOldStream()
@@ -49,5 +49,23 @@ describe('streams2-wrapper', function() {
         done()
       })
   })
-  
+  it('should wrap a 0.8 stream in a streams2 stream handling backpressure', function(done) {
+    var oldStream = createOldStream()
+    var newStream = wrap(oldStream)
+
+    var delayedTest = function() {
+      var index = 0
+      newStream
+        .on('readable', function() {
+          var data = newStream.read()
+          assert.equal(data, source[index])
+          index++
+        })
+        .on('end', function() {
+          assert.equal(index, source.length)
+          done()
+        })
+    }
+    setTimeout(delayedTest, 100)
+  })
 })
