@@ -1,0 +1,14 @@
+{
+  "name": "streams2-wrapper",
+  "version": "0.0.1",
+  "description": "wrap a 0.8 stream in a streams2 stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "author": "Mirko Kiefer <mail@mirkokiefer.com>",
+  "license": "BSD",
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  }
+}
